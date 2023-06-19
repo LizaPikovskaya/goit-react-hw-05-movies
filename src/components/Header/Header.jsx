@@ -2,7 +2,6 @@ import { HeaderStyled, NavList, StyledNavLink } from './Header.styled';
 
 export const Header = () => {
   return (
-    <>
       <HeaderStyled>
         <nav>
           <NavList>
@@ -15,6 +14,5 @@ export const Header = () => {
           </NavList>
         </nav>
       </HeaderStyled>
-    </>
   );
 };
