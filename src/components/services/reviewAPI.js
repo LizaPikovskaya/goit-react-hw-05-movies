@@ -11,9 +11,11 @@ export const fetchReview = (id) => {
 };
 
 export const fetchDetails = (id) => {
-  return axios.get(`https://api.themoviedb.org/3/movie/${id}`
-  );
+  return axios.get(`https://api.themoviedb.org/3/movie/${id}`);
 };
 
+export const fetchCast= id => {
+  return axios.get(`https://api.themoviedb.org/3/movie/${id}/credits`);
+};
 
 

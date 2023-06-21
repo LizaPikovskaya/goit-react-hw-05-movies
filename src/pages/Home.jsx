@@ -1,13 +1,29 @@
-import { Link } from 'react-router-dom';
+import { List, StyledLink } from 'components/Home/Home.styled';
+import { fetchPopularMovies } from 'components/services/trendingMoviesAPI';
+import { useEffect, useState } from 'react';
+import {  useLocation } from 'react-router-dom';
 
-export const Home = ({data}) => {
+const Home = () => {
+  const [data, setData] = useState([]);
+  const location = useLocation()
+  useEffect(() => {
+    async function getPopularMovies() {
+      const { data } = await fetchPopularMovies();
+      setData(data.results);
+    }
+    getPopularMovies();
+  },[]);
   return (
-    <ul>
+    <List>
       {data.map(({ id, title }) => (
         <li key={id}>
-          <Link to={`movie/${id}`}>{title}</Link>
+          <StyledLink to={`movie/${id}`} state={location}>
+            {title}
+          </StyledLink>
         </li>
       ))}
-    </ul>
+    </List>
   );
 };
+
+export default Home;

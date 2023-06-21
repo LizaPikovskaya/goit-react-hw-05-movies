@@ -28,8 +28,9 @@ export const NavList = styled.ul`
 `;
 
 export const StyledNavLink = styled(NavLink)`
+font-weight: 500;
   color: white;
-  transition: all 300ms linear;
+  transition: all 250ms linear;
 
   &.active,
   &:hover,
