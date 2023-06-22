@@ -17,7 +17,7 @@ ul {
   }
 `;
 
-export const Button = styled(Link)`
+export const BackLink = styled(Link)`
   display: inline-flex;
   align-items: center;
   gap: 5px;

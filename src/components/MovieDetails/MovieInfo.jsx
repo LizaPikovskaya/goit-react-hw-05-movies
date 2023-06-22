@@ -1,25 +1,21 @@
-import { useLocation } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
 import {
   AdditionalWrapper,
-  Button,
+  BackLink,
 } from 'components/MovieDetails/MovieDetails.styled';
 import { StyledLink } from 'components/Home/Home.styled';
-import { Outlet } from 'react-router-dom';
 import { Wrapper } from 'components/MovieDetailsCard/MovieDetailsCard.styled';
-import { Suspense } from 'react';
-import { Loader } from 'components/Loader/Loader';
 
-export const MovieInfo = ({ details }) => {
+export const MovieInfo = ({ details, location }) => {
   const { title, vote_average, overview, poster_path, release_date } = details;
-  const location = useLocation();
-  const buttonBack = location.state ?? '/';
+  const backLinkHref = location.state?.from ?? '/';
+  console.log(backLinkHref);
   return (
     <>
-      <Button to={buttonBack}>
+      <BackLink to={backLinkHref}>
         <BiArrowBack />
         Go back
-      </Button>
+      </BackLink>
       <Wrapper>
         <img
           src={`https://image.tmdb.org/t/p/w300${poster_path}`}
@@ -47,9 +43,6 @@ export const MovieInfo = ({ details }) => {
           </li>
         </ul>
       </AdditionalWrapper>
-      <Suspense fallback={<Loader />}>
-        <Outlet />
-      </Suspense>
     </>
   );
 };

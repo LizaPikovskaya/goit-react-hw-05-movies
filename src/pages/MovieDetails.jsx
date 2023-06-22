@@ -1,14 +1,17 @@
 import { Container } from 'components/Container/Container.styled';
-import { fetchDetails } from 'components/services/reviewAPI';
+import { fetchDetails } from 'components/services/API';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { MovieInfo } from 'components/MovieDetails/MovieInfo';
 import { Loader } from 'components/Loader/Loader';
+import { Outlet } from 'react-router-dom';
+import { Suspense } from 'react';
 
 const MovieDetails = () => {
-  const [details, setDetails] = useState([]);
+  const [details, setDetails] = useState(null);
   const [loading, setLoading] = useState(false);
   const { movieId } = useParams();
+  const location = useLocation();
   useEffect(() => {
     const getDetails = async () => {
       try {
@@ -27,8 +30,12 @@ const MovieDetails = () => {
   return (
     <section style={{ padding: '30px 0px' }}>
       <Container>
-        {loading && <Loader/>}
-        {details.length && <MovieInfo details={details} />}</Container>
+        {loading && <Loader />}
+        {details && <MovieInfo details={details} location={location} />}
+        <Suspense fallback={<Loader />}>
+          <Outlet />
+        </Suspense>
+      </Container>
     </section>
   );
 };

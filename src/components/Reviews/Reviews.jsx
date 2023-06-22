@@ -1,31 +1,53 @@
-import { fetchReview } from "components/services/reviewAPI";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { fetchReview } from 'components/services/API';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Loader } from 'components/Loader/Loader';
 
-export const Reviews = () => {
- const [reviews, setReviews] = useState([]);
- const { movieId } = useParams();
+const Reviews = () => {
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(false);
 
- useEffect(() => {
-   const getCast = async () => {
-     try {
-       const response = await fetchReview(movieId);
-       setReviews(response.data.results);
-     } catch (error) {}
-   };
-   getCast();
- }, [movieId]);
+  const { movieId } = useParams();
+
+  useEffect(() => {
+    const getCast = async () => {
+      try {
+        setLoading(true);
+        const response = await fetchReview(movieId);
+        setReviews(response.data.results);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getCast();
+  }, [movieId]);
+
+  // useEffect(() => {
+  //   window.scrollBy({
+  //     top: 200 * 2,
+  //     behavior: 'smooth',
+  //   });
+  // }, [reviews]);
 
   return (
-    <ul>
-      {reviews.length > 0 ? 
-      reviews.map(({ author, content, id }) => (
-        <li key={id}>
-          <h4>Author: {author}</h4>
-          <p>{content}</p>
-        </li>
-      )) :
-      <p>We don't have any reviews for this movie.</p>}
-    </ul>
+    <>
+      {loading && <Loader />}
+      <ul>
+        {reviews.length > 0 ? (
+          reviews.map(({ author, content, id }) => (
+            <li key={id}>
+              <h4>Author: {author}</h4>
+              <p>{content}</p>
+            </li>
+          ))
+        ) : (
+          <p>We don't have any reviews for this movie.</p>
+        )}
+      </ul>
+    </>
   );
 };
+
+export default Reviews;
