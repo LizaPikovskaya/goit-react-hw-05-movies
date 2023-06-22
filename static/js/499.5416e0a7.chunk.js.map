@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/499.5416e0a7.chunk.js","mappings":"2JAME,UALY,WACZ,OACA,yBAAK,0BACF,C","sources":["pages/Movie.jsx"],"sourcesContent":["\nconst Movie = () => {\n  return (\n  <div>Welcome to Movie page!</div>\n  );};\n\n  export default Movie\n"],"names":[],"sourceRoot":""}
