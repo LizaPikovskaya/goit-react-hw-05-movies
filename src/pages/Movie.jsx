@@ -26,7 +26,6 @@ const Movie = () => {
         setLoading(true);
         const response = await fetchAnyMovie(name);
         setMovies(response.data.results);
-        console.log(response.data.results);
       } catch (error) {
         console.log(error);
       } finally {
@@ -64,7 +63,7 @@ const Movie = () => {
       <List>
         {movies.map(({ title, id }) => (
           <li key={id}>
-            <StyledLink to={`${id}`} state={{ from: location }}>
+            <StyledLink to={`${id}`} state={{ from: location}}>
               {title}
             </StyledLink>
           </li>

@@ -8,9 +8,7 @@ import { run as runHolder } from 'holderjs';
 const Cast = () => {
   const [cast, setCast] = useState([]);
   const [loading, setLoading] = useState(false);
-  console.log(cast);
   const { movieId } = useParams();
-
   useEffect(() => {
     const getCast = async () => {
       try {
@@ -29,6 +27,14 @@ const Cast = () => {
   useEffect(() => {
     runHolder('holder');
   });
+
+  // useEffect(() => {
+  //   window.scrollBy({
+  //     top: 200 * 2,
+  //     behavior: 'smooth',
+  //   });
+  // }, [cast]);
+
   return (
     <>
       {loading && <Loader />}

@@ -8,8 +8,7 @@ import { Wrapper } from 'components/MovieDetailsCard/MovieDetailsCard.styled';
 
 export const MovieInfo = ({ details, location }) => {
   const { title, vote_average, overview, poster_path, release_date } = details;
-  const backLinkHref = location.state?.from ?? '/';
-  console.log(backLinkHref);
+  const backLinkHref = location.state?.from ;
   return (
     <>
       <BackLink to={backLinkHref}>
