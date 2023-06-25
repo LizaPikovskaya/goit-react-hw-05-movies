@@ -37,7 +37,7 @@ const Movie = () => {
   const handlerOnSubmit = evt => {
     evt.preventDefault();
     const form = evt.currentTarget;
-    if (!name.trim()) return toast.warn('Please, fill the field.');
+    if (!name) return toast.warn('Please, fill the field.');
     const nextParams = name !== '' ? { name: form.elements.name.value } : {};
     setSearchParams(nextParams);
     form.reset();
@@ -45,10 +45,9 @@ const Movie = () => {
 
   return (
     <>
-      <SearchForm>
+      <SearchForm onSubmit={handlerOnSubmit}>
         <SearchFormInput
           name="name"
-          onSubmit={handlerOnSubmit}
           type="text"
           autocomplete="off"
           autoFocus
@@ -63,7 +62,7 @@ const Movie = () => {
       <List>
         {movies.map(({ title, id }) => (
           <li key={id}>
-            <StyledLink to={`${id}`} state={{ from: location}}>
+            <StyledLink to={`${id}`} state={{ from: location }}>
               {title}
             </StyledLink>
           </li>

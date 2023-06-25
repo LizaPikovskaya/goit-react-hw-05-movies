@@ -5,13 +5,16 @@ import {
 } from 'components/MovieDetails/MovieDetails.styled';
 import { StyledLink } from 'components/Home/Home.styled';
 import { Wrapper } from 'components/MovieDetailsCard/MovieDetailsCard.styled';
+import { useLocation } from 'react-router-dom';
 
-export const MovieInfo = ({ details, location }) => {
+export const MovieInfo = ({ details, backLink }) => {
   const { title, vote_average, overview, poster_path, release_date } = details;
-  const backLinkHref = location.state?.from ;
+  const location = useLocation()
+  console.log(location);
+  // const backLink = location?.state?.from ?? '/'; 
   return (
     <>
-      <BackLink to={backLinkHref}>
+      <BackLink to={backLink.current}>
         <BiArrowBack />
         Go back
       </BackLink>
@@ -35,10 +38,14 @@ export const MovieInfo = ({ details, location }) => {
         <p>Additional information</p>
         <ul>
           <li>
-            <StyledLink to="cast">Cast</StyledLink>
+            <StyledLink to="cast" state={{ from: location }}>
+              Cast
+            </StyledLink>
           </li>
           <li>
-            <StyledLink to="reviews">Reviews</StyledLink>
+            <StyledLink to="reviews" state={{ from: location }}>
+              Reviews
+            </StyledLink>
           </li>
         </ul>
       </AdditionalWrapper>
