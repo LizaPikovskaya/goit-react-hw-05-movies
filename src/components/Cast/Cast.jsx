@@ -1,6 +1,6 @@
 import { fetchCast } from 'components/services/API';
 import { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { List } from './Cast.styled';
 import { Loader } from 'components/Loader/Loader';
 import { run as runHolder } from 'holderjs';
